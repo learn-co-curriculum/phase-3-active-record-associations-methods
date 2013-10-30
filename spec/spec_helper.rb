@@ -29,11 +29,6 @@ RSpec.configure do |config|
   end
 end
 
-def load_migration_from_file(path)
-  require path
-  migration = Kernel.const_get(path.split("/").last.split(".rb").first.gsub(/\d+/, "").split("_").collect{|w| w.strip.capitalize}.join())
-end
-
 def reset_database
 
   DB.tables.each do |table|
@@ -43,11 +38,8 @@ def reset_database
   Dir[File.join(File.dirname(__FILE__), "../migrations", "*.rb")].each do |f| 
     require f
     migration = Kernel.const_get(f.split("/").last.split(".rb").first.gsub(/\d+/, "").split("_").collect{|w| w.strip.capitalize}.join())
-    migration.up
+    migration.migrate(:up)
   end
 
 end
 
-def __
-  raise "Replace the __ with code to make the test pass"
-end
