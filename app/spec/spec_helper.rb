@@ -21,3 +21,9 @@ def reset_database
   app.load_rakefile
   app['db:migrate'].invoke
 end
+
+def clean_database
+  Artist.delete_all
+  Song.delete_all
+  Genre.delete_all
+end

@@ -5,6 +5,10 @@ describe 'Genre' do
     @genre = Genre.create(name: "Hip Hop")
   end
 
+  after do
+    clean_database
+  end
+
   it 'has a name' do
     expect(Genre.where(name: "Hip Hop").first).to eq(@genre)
   end
@@ -13,8 +17,8 @@ describe 'Genre' do
     @genre.songs << Song.create(name: "Something By That Person Who Sings Stuff")
     @genre.save
 
-    found_song = Song.find(name: "Something By That Person Who Sings Stuff")
-    expect(found_song.genre).to include(@genre)
+    found_song = Song.find_by(name: "Something By That Person Who Sings Stuff")
+    expect(found_song.genre).to eq(@genre)
   end
 
   it 'is also associated with an artist' do

@@ -5,6 +5,10 @@ describe 'Song' do
     @song = Song.create(name: "Forever")
   end
 
+  after do
+    clean_database
+  end
+
   it 'has a name' do
     expect(Song.where(name: "Forever").first).to eq(@song)
   end
@@ -34,7 +38,7 @@ describe 'Song' do
 
   it 'can build genres' do
     genre = @song.build_genre(name: "Rap")
-    genre.save
+    @song.save
 
     expect(Song.where(name: "Forever").first.genre).to eq(genre)
     expect(Genre.where(name: "Rap").first.songs).to include(@song)
