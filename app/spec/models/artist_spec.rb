@@ -1,36 +1,48 @@
 require_relative '../spec_helper'
 
 describe 'Artist' do
+  before do
+    @prince = Artist.create(name: "Prince")
+  end
+
   it 'has a name' do
-    prince = Artist.new(:name => "Prince")
-    prince.save
-
-    expect(Artist.find_by_name("Prince")).to eq(prince)
+    expect(Artist.find_by(name: "Prince")).to eq(@prince)
   end
 
-  it 'can push many songs' do
-    prince = Artist.new(:name => "Prince")
-    prince.save
+  it 'can build a song' do
+    song = @prince.songs.build(name: "A Song By Prince")
+    song.save
 
-    s = Song.new(:name => "A Song By Prince")    
-    s2 = Song.new(:name => "A Song By Prince 2")    
-    prince.songs << [s,s2]
+    expect(@prince.songs).to include(song)
+  end
+
+  it 'can create a song' do
+    song = @prince.songs.create(name: "A Different Song By Prince")
+
+    expect(@prince.songs).to include(song)
+  end
+
+  it 'knows about songs that are affiliated with it' do
+    song = Song.create(name: "Bestest Song in the Worldz", artist: @prince)
+
+    expect(@prince.songs).to include(song)
+  end
+
+  it 'can add many songs at the same time' do
+    song_1 = Song.create(:name => "A Song By Prince")    
+    song_2 = Song.create(:name => "A Song By Prince 2")    
+    @prince.songs << [song_1, song_2]
 
     expect(Artist.find_by_name("Prince").songs.count).to eq(2)
   end
 
-  it 'can push many songs' do
-    prince = Artist.new(:name => "Prince")
+  it 'knows about its genres' do
+    song = Song.create(name: "Super Hip Music")
+    genre = Genre.create(name: "Soul")
+    song.genre = genre
+    song.save
+    @prince.songs << song
 
-    prince.songs.build(:name => "Song 1")
-    prince.songs.build(:name => "Song 2")
-
-    prince.save
-
-    expect(Artist.find_by_name("Prince").songs.count).to eq(2)
+    expect(@prince.genres).to include(genre)
   end
-
-
-
-
 end
