@@ -9,12 +9,12 @@ describe 'Genre' do
     expect(Genre.where(name: "Hip Hop").first).to eq(@genre)
   end
 
-  it 'belongs to a song' do
-    @genre.song = Song.create(name: "Something By That Person Who Sings Stuff")
+  it 'has many songs' do
+    @genre.songs << Song.create(name: "Something By That Person Who Sings Stuff")
     @genre.save
 
     found_song = Song.find(name: "Something By That Person Who Sings Stuff")
-    expect(found_song.genres).to include(@genre)
+    expect(found_song.genre).to include(@genre)
   end
 
   it 'is also associated with an artist' do

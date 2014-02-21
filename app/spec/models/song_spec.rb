@@ -33,7 +33,7 @@ describe 'Song' do
   end
 
   it 'can build genres' do
-    genre = @song.genres.build(name: "Rap")
+    genre = @song.build_genre(name: "Rap")
     genre.save
 
     expect(Song.where(name: "Forever").first.genre).to eq(genre)

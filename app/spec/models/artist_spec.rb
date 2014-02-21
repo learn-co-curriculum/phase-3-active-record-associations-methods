@@ -33,7 +33,7 @@ describe 'Artist' do
     song_2 = Song.create(:name => "A Song By Prince 2")    
     @prince.songs << [song_1, song_2]
 
-    expect(Artist.find_by_name("Prince").songs.count).to eq(2)
+    expect(Artist.find_by(name: "Prince").songs.count).to eq(2)
   end
 
   it 'knows about its genres' do
