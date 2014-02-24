@@ -23,7 +23,7 @@ def reset_database
 end
 
 def clean_database
-  Artist.delete_all
-  Song.delete_all
-  Genre.delete_all
+  Artist.delete_all if defined?(Artist) && DB.tables.include?("artists")
+  Song.delete_all if defined?(Song) && DB.tables.include?("songs")
+  Genre.delete_all if defined?(Genre) && DB.tables.include?("genres")
 end
