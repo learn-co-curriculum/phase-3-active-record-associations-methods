@@ -20,6 +20,7 @@ def reset_database
   app.init
   app.load_rakefile
   app['db:migrate'].invoke
+  app['db:migrate'].reenable
 end
 
 def clean_database
