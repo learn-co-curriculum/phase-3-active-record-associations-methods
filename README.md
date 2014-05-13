@@ -1,7 +1,7 @@
 ---
 languages: ruby
 tags: activerecord, playlister, orm
-  resources: 2
+resources: 2
 ---
 
 # Playlister on ActiveRecord
