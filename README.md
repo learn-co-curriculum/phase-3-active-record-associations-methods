@@ -1,6 +1,7 @@
 ---
 languages: ruby
 tags: activerecord, playlister, orm
+  resources: 2
 ---
 
 # Playlister on ActiveRecord
@@ -44,3 +45,7 @@ There are a number of ways to approach solving this lab; the following steps are
 
 1. Write a `db:seed` rake task.
 2. Integrate your SiteGenerator within this version of Playlister.
+
+## Resources
+* [Ruby Docs](http://www.ruby-doc.org/) - [OpenStruct](http://www.ruby-doc.org/stdlib-2.1.0/libdoc/ostruct/rdoc/OpenStruct.html)
+* [Rails Guides](http://guides.rubyonrails.org/) - [Active Record Basics](http://guides.rubyonrails.org/association_basics.html)
