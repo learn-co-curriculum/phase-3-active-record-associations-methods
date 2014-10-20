@@ -55,15 +55,15 @@ If a Song belongs to an Artist, as well as a Genre, then that means that there a
 
 Song would look something like this:
 
-|id|name        |artist_id|genre_id |
-|--|------------|---------|---------|
-|2 |Shake It Off| 1       | 1       |
+|id |name        |artist_id |genre_id |
+|---|------------|----------|---------|
+|2  |Shake It Off|1         |1        |
 
 And Artist:
 
-|id|name        |
-|--|------------|
-|1 |Taylor Swift|
+|id |name         |
+|---|-------------|
+|1  |Taylor Swift |
 
 And Genre:
 
