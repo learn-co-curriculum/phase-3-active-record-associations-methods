@@ -14,7 +14,7 @@ We'll have three models: Artists, Songs, and Genres. By writing a few migrations
 
 ## How ActiveRecord works
 
-As an ORM, ActiveRecord works just like the ORM you've built already: it just has its own abstractions that you'll be using instead. 
+As an ORM, ActiveRecord works just like the ORM you've built already in labs like School Domain with DB. It provides its own abstractions and a similar API for interacting with the Database through your object model.
 
 We're going to be using ActiveRecord to do two things: to store the data in a database (through a schema which we generate with migrations) to create associations between our objects (through ActiveRecord abstractions).
 
