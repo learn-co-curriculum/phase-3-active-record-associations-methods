@@ -8,7 +8,7 @@ resources: 2
 
 ## Description
 
-In this lab, we'll be recreating the basic functionality that we already built out in [Playlister-rb using](http://learn.flatironschool.com/lessons/940) but this time, using ActiveRecord associations. 
+In this lab, we'll be recreating the basic functionality that we already built out in [Playlister-rb](http://learn.flatironschool.com/lessons/940) but this time, using ActiveRecord associations. 
 
 We'll have three models: Artists, Songs, and Genres. By writing a few migrations and making use of the appropriate ActiveRecord macros, we want to end up with three models that are associated with one another in a way that makes sense. I should be able to: ask an Artist about its songs and genres, ask a Song about its genre and its artist, and ask a Genre about its songs and artists.
 
