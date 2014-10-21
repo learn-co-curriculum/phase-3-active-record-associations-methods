@@ -37,7 +37,7 @@ We're going to be using ActiveRecord to do two things: to store the data in a da
 
 There are a bunch of ActiveRecord association macros available. Let's work through our domain here to figure out the best ones to use.
 
-I like to think of Song a connector between Artist and Genre (Taylor Swift isn't in the genre pop unless she write pop songs, right?). So therefore:
+I like to think of Song as a connector between Artist and Genre (Taylor Swift isn't in the genre pop unless she writes pop songs, right?). So therefore:
 
 * An Artist has many Songs, and it has many Genres, through Songs.
 * A Genre has many Songs, and it has many Artists, through Songs.
@@ -49,9 +49,9 @@ ActiveRecord has some great macros to achieve the above associations:
 * [`has_many though`](http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association)
 * [`belongs_to`](http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association)
 
-What does this look like on our tables in the database?
+What does this look like in our schema, in our table definitions and structure?
 
-If a Song belongs to an Artist, as well as a Genre, then that means that there are foreign keys on the Songs table that point to the id on the respective table.
+If a Song belongs to an Artist, as well as a Genre, then that means that there are foreign keys on the Songs table that point to the id on the respective tables.
 
 Song would look something like this:
 
@@ -73,7 +73,7 @@ And Genre:
 
 The `artist_id` of 1 points to the row in the Artist table where the id is 1. And the `genre_id` of 1 points to the row in the Genre table where the id is 1.
 
-These foreign keys, in conjunction with the ActiveRecord association macros (`belongs_to`, `has_many`, `has_many through`) will allow us to many ActiveRecord queries (more on that later) to get an artist's songs or genres, a song's artist or genre, and a genre's songs and artists
+These foreign keys, in conjunction with the ActiveRecord association macros (`belongs_to`, `has_many`, `has_many through`) will allow us query to get an artist's songs or genres, a song's artist or genre, and a genre's songs and artists entirely through ActiveRecord provided methods on our classes.
 
 ### Some Notes
 
