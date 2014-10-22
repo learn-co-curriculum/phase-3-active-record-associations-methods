@@ -31,11 +31,11 @@ We're going to be using ActiveRecord to do two things: to store the data in a da
 
 3. You'll probably get some errors now that are related to the database. This would probably be a good time to write your migrations. Four of the files for these migrations have been created for you in `db/migrations`, but you'll need to add a fifth to make all of the specs pass. Notice that there is a very strong naming convention at play here. In the file `01_create_songs.rb`, there is a migration defined called `CreateSongs`. The filename of the migration, excluding the version number in the first position, `create_songs` must match up to the migration class defined within the file, `CreateSongs`, without this convention, ActiveRecord will throw an error. `seperate_words_with_underscores_and_join_them_together_in_a_class_with_capitals` becomes `SeperateWordsWithUnderscoresAndJoinThemTogetherInAClassWithCapitals`.
 
-4. Take a look at the Rakefile. There are a few rake tasks that will help us with our migrations. These tasks mimic the rake tasks that Rails give you for free. There's `rake db:migrate` which takes the migrations you've made and applies them to the database. `rake db:drop` drops the tables in the database.
+4. Take a look at the Rakefile. There are a few rake tasks that will help us with our migrations. These tasks mimic the rake tasks that Rails gives you for free. There's `rake db:migrate` which takes the migrations you've made and applies them to the database. `rake db:drop` drops the tables in the database.
 
-**You'll need to run `rake db:migrate` before running the tests**
+You can run `rake db:migrate` to migrate the database and `rake db:drop` if you need to drop it.
 
-Run `rake db:drop` if you need to.
+Take a look in `spec_helper.rb` which in a `config.before` block resets the database. In each spec, in an `after` block, the database is cleaned. This creates a clean database environment for each test, to avoid test errors.
 
 5. Once you've set up your migrations, it's time to create the associations between your models.
 
