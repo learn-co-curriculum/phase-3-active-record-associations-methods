@@ -1,14 +1,10 @@
-describe 'Genre' do
+describe 'Genre Associations' do
   before do
     @genre = Genre.create(name: "Hip Hop")
   end
 
   after do 
     clean_database
-  end
-
-  it 'has a name' do
-    expect(Genre.where(name: "Hip Hop").first).to eq(@genre)
   end
 
   it 'has many songs' do
@@ -27,4 +23,5 @@ describe 'Genre' do
 
     expect(@genre.artists).to include(artist)
   end
+  
 end
