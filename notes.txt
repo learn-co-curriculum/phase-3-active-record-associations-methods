@@ -1,0 +1,106 @@
+notes.txt
+
+Notes:
+# objectives done:
+1) Become familiar with ActiveRecord syntax for models and migrations.
+
+2) Learn about ActiveRecord macros for creating associations between models.
+
+
+--fail-fast doesn't work with this lab.
+
+14/14
+1) `uninitialized constant Song`
+- create `models/song.rb`, define `Song` class
+
+2) `Could not find table 'songs'`
+- fill in migration for songs table (seems rake db:migrate is part of what happens when the spec is run, so no need to do that)
+
+  def change
+    create_table :songs do |t|
+      t.string :name
+    end
+  end
+
+
+14/13
+3) `Could not find table 'artists'`
+- fill in migration for artists table
+  
+  def change
+    create_table :artists do |t|
+      t.string :name
+    end
+  end
+
+
+14/12
+4) `Could not find table 'genres'`
+
+  def change
+    create_table :genres do |t|
+      t.string :name
+    end
+  end
+
+
+14/11
+5) `undefined method `genre=' for #<Song id: 1, name: "Forever">`
+- fill in migration to add genre to songs, add `belongs_to :genre` in Song class
+
+class Song < ActiveRecord::Base
+  belongs_to :genre
+end
+
+class AddGenreToSongs < ActiveRecord::Migration
+  def change
+    add_column :songs, :genre_id, :integer
+  end
+end
+
+
+14/10
+6) `undefined method `artist=' for #<Song id: 1, name: "Forever", genre_id: nil>`
+- fill in migration to add artist to songs, add `belongs_to :artist` in Song class
+
+class AddArtistToSongs < ActiveRecord::Migration
+  def change
+    add_column :songs, :artist_id, :integer
+  end
+end
+
+class Song < ActiveRecord::Base
+  belongs_to :genre
+  belongs_to :artist
+end
+
+
+14/8
+7) `undefined method `songs' for #<Genre id: 1, name: "Rap">`
+- add `has_many :songs` to Genre class
+
+class Genre < ActiveRecord::Base
+  has_many :songs
+end
+
+
+14/6
+8) `undefined method `songs' for #<Artist id: 1, name: "Prince">`
+- add `has_many :songs` to Artist class
+
+
+14/2
+9) `undefined method `genres' for #<Artist id: 1, name: "Prince">`
+- Add `has_many :genres, through: :songs` to Artist class
+
+class Artist < ActiveRecord::Base
+  has_many :songs
+  has_many :genres, through: :songs
+end
+
+
+14/1
+10) `undefined method `artists' for #<Genre id: 1, name: "Hip Hop">`
+- Add `has_many :artists, through: :songs` to Genre class
+
+DONE!

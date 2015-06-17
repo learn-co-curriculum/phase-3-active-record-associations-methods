@@ -6,6 +6,12 @@ resources: 2
 
 # Playlister on ActiveRecord
 
+## Objectives
+
+1) Become familiar with ActiveRecord syntax for models and migrations.
+
+2) Learn about ActiveRecord macros for creating associations between models.
+
 ## Description
 
 In this lab, we'll be recreating the basic functionality that we already built out in [Playlister-rb](http://learn.flatironschool.com/lessons/940) but this time, using ActiveRecord associations. 
@@ -16,7 +22,7 @@ We'll have three models: Artists, Songs, and Genres. By writing a few migrations
 
 As an ORM, ActiveRecord works just like the ORM you've built already in labs like School Domain with DB. It provides its own abstractions and a similar API for interacting with the Database through your object model.
 
-We're going to be using ActiveRecord to do two things: to store the data in a database (through a schema which we generate with migrations) to create associations between our objects (through ActiveRecord abstractions).
+We're going to be using ActiveRecord to do two things: to store the data in a database (through a schema which we generate with migrations) to create associations between our objects (through ActiveRecord macros like `belongs_to` and `has_many`).
 
 ### Steps
 
