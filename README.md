@@ -6,6 +6,12 @@ resources: 2
 
 # Playlister on ActiveRecord
 
+## Objectives
+
+1) Become familiar with ActiveRecord syntax for models and migrations.
+
+2) Learn about ActiveRecord macros for creating associations between models.
+
 ## Description
 
 In this lab, we'll be recreating the basic functionality that we already built out in [Playlister-rb](http://learn.flatironschool.com/lessons/940) but this time, using ActiveRecord associations. 
@@ -16,30 +22,34 @@ We'll have three models: Artists, Songs, and Genres. By writing a few migrations
 
 As an ORM, ActiveRecord works just like the ORM you've built already in labs like School Domain with DB. It provides its own abstractions and a similar API for interacting with the Database through your object model.
 
-We're going to be using ActiveRecord to do two things: to store the data in a database (through a schema which we generate with migrations) to create associations between our objects (through ActiveRecord abstractions).
+We're going to be using ActiveRecord to do two things: to store the data in a database (through a schema which we generate with migrations) to create associations between our objects (through ActiveRecord macros like `belongs_to` and `has_many`).
 
-### Steps
+## Steps
 
-1. The first thing you should do is run `rspec` from your command line. You'll probably be able to knock out a few errors pretty quickly here.
+### 1) Models
 
-2. It may be useful to go ahead and define your models at this point. You'll need to do this in the `app/models` directory. Two of the files have already been created for you, but you'll need to make one for your `Song` model. Remember, since we're using ActiveRecord, models should inherit from `ActiveRecord::Base`. A sample definition would look like this:
+The first thing you should do is run `rspec` from your command line. You'll probably be able to knock out a few errors pretty quickly here.
+
+It may be useful to go ahead and define your models at this point. You'll need to do this in the `app/models` directory. Two of the files have already been created for you, but you'll need to make one for your `Song` model. Remember, since we're using ActiveRecord, models should inherit from `ActiveRecord::Base`. A sample definition would look like this:
 
   ```ruby
   class SomeClass < ActiveRecord::Base
   end
   ```
 
-3. You'll probably get some errors now that are related to the database. This would probably be a good time to write your migrations. Four of the files for these migrations have been created for you in `db/migrations`, but you'll need to add a fifth to make all of the specs pass. Notice that there is a very strong naming convention at play here. In the file `01_create_songs.rb`, there is a migration defined called `CreateSongs`. The filename of the migration, excluding the version number in the first position, `create_songs` must match up to the migration class defined within the file, `CreateSongs`, without this convention, ActiveRecord will throw an error. `seperate_words_with_underscores_and_join_them_together_in_a_class_with_capitals` becomes `SeperateWordsWithUnderscoresAndJoinThemTogetherInAClassWithCapitals`.
+### 2) Migrations
 
-4. Take a look at the Rakefile. There are a few rake tasks that will help us with our migrations. These tasks mimic the rake tasks that Rails gives you for free. There's `rake db:migrate` which takes the migrations you've made and applies them to the database. `rake db:drop` drops the tables in the database.
+You'll probably get some errors now that are related to the database. This would probably be a good time to write your migrations. Four of the files for these migrations have been created for you in `db/migrations`, but you'll need to add a fifth to make all of the specs pass. Notice that there is a very strong naming convention at play here. In the file `01_create_songs.rb`, there is a migration defined called `CreateSongs`. The filename of the migration, excluding the version number in the first position, `create_songs` must match up to the migration class defined within the file, `CreateSongs`, without this convention, ActiveRecord will throw an error. `seperate_words_with_underscores_and_join_them_together_in_a_class_with_capitals` becomes `SeperateWordsWithUnderscoresAndJoinThemTogetherInAClassWithCapitals`.
+
+Take a look at the Rakefile. There are a few rake tasks that will help us with our migrations. These tasks mimic the rake tasks that Rails gives you for free. There's `rake db:migrate` which takes the migrations you've made and applies them to the database. `rake db:drop` drops the tables in the database.
 
 You can run `rake db:migrate` to migrate the database and `rake db:drop` if you need to drop it.
 
 Take a look in `spec_helper.rb` which in a `config.before` block resets the database. In each spec, in an `after` block, the database is cleaned. This creates a clean database environment for each test, to avoid test errors.
 
-5. Once you've set up your migrations, it's time to create the associations between your models.
+Once you've set up your migrations, it's time to create the associations between your models.
 
-### Associations
+### 3) Associations
 
 There are a bunch of ActiveRecord association macros available. Let's work through our domain here to figure out the best ones to use.
 
@@ -89,13 +99,18 @@ These foreign keys, in conjunction with the ActiveRecord association macros (`be
 
 2. The connection to the database has been taken care of for you. Whenever we migrate (or interact with in any way, really) the database, we set an environment variable, called `PLAYLISTER_ENV`. Based on this environment variable, we connect to a test, development, or production database. This is all being taken care of by the code in two files in `lib/support`. Again, no need to fully understand what's going on there. One of the files, `db_registry` makes use of an OpenStruct. If you'd like to learn more, check out the [documentation](http://www.ruby-doc.org/stdlib-2.1.0/libdoc/ostruct/rdoc/OpenStruct.html). You can sort of think of an OpenStruct as a really fancy hash.
 
+
+## Bonus
+
 ### Write More Tests
 
-1. Once you've managed to make the test suite pass, write your own tests. Within these tests, you should exercise working with different ways of creating associations.
+Once you've managed to make the test suite pass, write your own tests. Within these tests, you should exercise working with different ways of creating associations.
 
-### Bonus
+
+### Seed the Database
 
 Write a `db:seed` rake task.
+
 
 ## Resources
 
