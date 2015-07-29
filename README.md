@@ -1,8 +1,4 @@
----
-tags: activerecord, playlister, orm, associations
-languages: ruby
-resources: 2
----
+
 
 # Playlister on ActiveRecord
 
