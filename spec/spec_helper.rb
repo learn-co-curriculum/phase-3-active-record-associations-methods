@@ -12,11 +12,7 @@ RSpec.configure do |config|
 end
 
 def reset_database
-  app = Rake.application
-  app.init
-  app.load_rakefile
-  app['db:migrate'].invoke
-  app['db:migrate'].reenable
+  migrate_db
 end
 
 def clean_database

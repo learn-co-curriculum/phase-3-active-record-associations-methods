@@ -7,21 +7,11 @@ end
 
 namespace :db do
   task :migrate => :environment do
-    DB.tables.each do |table|
-      DB.execute("DROP TABLE #{table}")
-    end
-
-    Dir[File.join(File.dirname(__FILE__), "db/migrate", "*.rb")].each do |f| 
-      require f
-      migration = Kernel.const_get(f.split("/").last.split(".rb").first.gsub(/\d+/, "").split("_").collect{|w| w.strip.capitalize}.join())
-      migration.migrate(:up)
-    end
+    migrate_db
   end
 
   task :drop => :environment do 
-    DB.tables.each do |table|
-      DB.execute("DROP TABLE #{table}")
-    end
+    drop_db
   end
 end
 
