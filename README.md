@@ -1,5 +1,4 @@
 
-
 # Playlister on ActiveRecord
 
 ## Objectives
@@ -58,7 +57,7 @@ I like to think of Song as a connector between Artist and Genre (Taylor Swift is
 ActiveRecord has some great macros to achieve the above associations:
 
 * [`has_many`](http://guides.rubyonrails.org/association_basics.html#the-has-many-association)
-* [`has_many though`](http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association)
+* [`has_many through`](http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association)
 * [`belongs_to`](http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association)
 
 What does this look like in our schema, in our table definitions and structure?
