@@ -1,4 +1,3 @@
-
 # Playlister on ActiveRecord
 
 ## Objectives
@@ -34,7 +33,7 @@ It may be useful to go ahead and define your models at this point. You'll need t
 
 ### 2) Migrations
 
-You'll probably get some errors now that are related to the database. This would probably be a good time to write your migrations. Four of the files for these migrations have been created for you in `db/migrations`, but you'll need to add a fifth to make all of the specs pass. Notice that there is a very strong naming convention at play here. In the file `01_create_songs.rb`, there is a migration defined called `CreateSongs`. The filename of the migration, excluding the version number in the first position, `create_songs` must match up to the migration class defined within the file, `CreateSongs`, without this convention, ActiveRecord will throw an error. `seperate_words_with_underscores_and_join_them_together_in_a_class_with_capitals` becomes `SeperateWordsWithUnderscoresAndJoinThemTogetherInAClassWithCapitals`.
+You'll probably get some errors now that are related to the database. This would probably be a good time to write your migrations. Four of the files for these migrations have been created for you in `db/migrations`, but you'll need to add a fifth to make all of the specs pass. Notice that there is a very strong naming convention at play here. In the file `01_create_songs.rb`, there is a migration defined called `CreateSongs`. The filename of the migration, excluding the version number in the first position, `create_songs`, must match up to the migration class defined within the file, `CreateSongs`. If you don't follow this convention, ActiveRecord will throw an error. `seperate_words_with_underscores_and_join_them_together_in_a_class_with_capitals` becomes `SeperateWordsWithUnderscoresAndJoinThemTogetherInAClassWithCapitals`.
 
 Take a look at the Rakefile. There are a few rake tasks that will help us with our migrations. These tasks mimic the rake tasks that Rails gives you for free. There's `rake db:migrate` which takes the migrations you've made and applies them to the database. `rake db:drop` drops the tables in the database.
 
