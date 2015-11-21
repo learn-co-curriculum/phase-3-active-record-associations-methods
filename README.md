@@ -1,60 +1,25 @@
-# Active Record Associations Introduction: Playlister
+# Active Record Association Methods
 
 ## Objectives
 
-1. Understand how and why Active Record implements associations between models. 
-2. Use Active Record migrations and methods to build out a domain model that associates classes via the has-many/belongs-to *and* the many-to-many (or has-many-through) relationships.
+1. Understand the common methods we have access to from our ActiveRecord associations 
+2. Use the methods that ActiveRecord gives you based on your associations
 
-## What are Active Record Associations?
-
-We already know that we can build our classes such that they associate to one another. We also know that it takes a lot of code to do it. Active Record associations allow us to associate models *and their analogous database tables* without having to write tons of code. 
-
-Additionally, Active Record associations make actually working with our associated objects even quicker, neater and easier. 
-
-Sounds great, right? Now that we have you totally hooked, let's take a look at how we use these AR associations. 
-
-## How do we use AR Associations?
-
-Active Record makes it easy to implement the following relationships between models:
-
-* belongs_to
-* has_one
-* has_many
-* has_many :through
-* has_one :through
-* has_and_belongs_to_many
-
-We don't need to worry about most of these right now. We'll concern ourselves with relationships that should sound familiar:
-
-* belongs to
-* has many
-* has many through
-
-In order to implement these relationships we will need to do two things:
-
-1. Write a migration that creates tables with associations. For example, if a cat belongs to an owner, the cats table should have an `owner_id` column. 
-2. Use Active Record macros in the models. 
-
-We'll go through both of these steps together, using our Playlister domain model. 
-
-
-## Overview
-
-In this walk-through, we'll build building out a domain model for our fictitious music playing app, Playlister. This app will catalogue songs and their associated artists and genres.  
-
-We'll have three models: Artists, Songs, and Genres. By writing a few migrations and making use of the appropriate ActiveRecord macros (more on that later), we will be able to:
-
-* ask an Artist about its songs and genres
-* ask a Song about its genre and its artist
-* ask a Genre about its songs and artists.
-
-The relationships between artists, songs and genres will be enacted as follows:
+Previously, we learned what Active Record associations are and how to use them. In this lab, we are going to start with the association relationships already coded for `Songs`, `Genres`, and `Artists`. These associations look like this:
 
 * Artists have many songs and a song belongs to an artist. 
 * Artists have many genres through songs. 
 * Songs belong to a genre. 
 * A genre has many songs. 
 * A genre has many artists through songs. 
+
+You may recall that by writing a few migrations and making use of the appropriate ActiveRecord macros, we will be able to:
+
+* ask an Artist about its songs and genres
+* ask a Song about its genre and its artist
+* ask a Genre about its songs and artists.
+
+
 
 We will build these associations through the use of Active Record migrations and macros. 
 
