@@ -23,116 +23,13 @@ You may recall that by writing a few migrations and making use of the appropriat
 
 We will build these associations through the use of Active Record migrations and macros. 
 
-## Building our Migrations
+### Building our Migrations
 
-### The Song model
+You can take a look at the migration, if you need a reminder of the tables' structures. Run `rake db:migrate` in your terminal to execute our table creations. 
 
-A song will belong to an artist *and* belong to a genre. Before we worry about the migration that will implement this in our songs table, let's think about what that table will look like:
+### Building our Associations using AR Macros
 
-
-|id |name        |artist_id |genre_id |
-|---|------------|----------|---------|
-|2  |Shake It Off|1         |1        |
-
-We can see that the songs table will have an `artist_id` column and a `genre_id` column. We will give a given song an `artist_id` value of the artist it belongs to. The same goes for genre. These foreign keys, in conjunction with the ActiveRecord association macros will allow us query to get an artist's songs or genres, a song's artist or genre, and a genre's songs and artists entirely through ActiveRecord provided methods on our classes.
-
-Let's write the migration that will make this happen. 
-
-* Create a file, `db/migrations/001_create_song_table.rb`
-* Write the following migration:
-
-```ruby
-class CreateSongs < ActiveRecord::Migration
-  def change
-    create_table :songs do |t|
-      t.string :name 
-      t.integer :artist_id
-      t.integer :genre_id
-    end
-  end
-end
-```
-
-### The Artist Model
-
-An artist will have many songs and it will have many genres *through* songs. These associations will be taken care of entirely through AR macros, which we'll get to in a bit. 
-
-Let's take a look at what our artists table will need to look like:
-
-
-|id |name         |
-|---|-------------|
-|1  |Taylor Swift |
-
-Our artists table just needs a `name` column. Let's write the migration. In `db/migrate/002_create_artists_table.rb`:
-
-```ruby
-class CreateArtists < ActiveRecord::Migration
-  def change
-    create_table :artists do |t|
-      t.string :name
-    end
-  end
-end
-```
-
-### The Genre Model
-
-A genre will have many songs and it will have many artists through songs. These associations will be taken care of entirely through AR macros, which we'll get to in a bit. 
-
-Let's take a look at what our genres table will need to look like:
-
-|id |name |
-|---|-----|
-|1  |pop  |
-
-Let's write our migration. In `db/migrate/003_create_genres_table.rb`:
-
-```ruby
-class CreateGenres < ActiveRecord::Migration
-  def change
-    create_table :genres do |t|
-      t.string :name 
-    end
-  end
-end
-```
-
-Great! Now go ahead and run `rake db:migrate` in your terminal to execute our table creations. 
-
-## Building our Associations using AR Macros
-
-### What is a macro?
-
-A macro is a method that writes code for us (think metaprogramming). By invoking a few methods that come with Active Record, we can implement all of the associations we've been discussing. 
-
-We'll be using the following AR macros (or methods):
-
-* [`has_many`](http://guides.rubyonrails.org/association_basics.html#the-has-many-association)
-* [`has_many through`](http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association)
-* [`belongs_to`](http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association)
-
-Let's get started. 
-
-### A Song Belongs to an Artist and A Genre
-
-Create a file, `app/models/song.rb`. Define your `Song` class to inherit from `ActiveRecord::Base`. This is very important! If we don't inherit from Active Record Base, we won't get our fancy macro methods. 
-
-```ruby
-class Song < ActiveRecord::Base
-
-end
-```
-
-We need to tell the `Song` class that it will produce objects that can belong to an artist. We will do it with the `belongs_to` macro:
-
-```ruby
-class Song < ActiveRecord::Base
-  belongs_to :artist
-end
-```
-
-Songs also belong to a genre, so we'll use the same macro to implement that relationship:
+We used the following AR macros (or methods): [`has_many`](http://guides.rubyonrails.org/association_basics.html#the-has-many-association), [`has_many through`](http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association), [`belongs_to`](http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association). They helped us associate `songs`, `genres`, and `artists`.
 
 ```ruby
 class Song < ActiveRecord::Base
@@ -141,55 +38,12 @@ class Song < ActiveRecord::Base
 end
 ```
 
-### An Artist Has Many Songs
-
-Create a file, `app/models/artist.rb`. Define your `Artist` class to inherit from `ActiveRecord::Base`:
-
-```ruby
-class Artist < ActiveRecord::Base
-
-end
-```
-
-We need to tell the `Artist` class that each artist object can have many songs. We will use the `has_many` macro to do it.
-
-```ruby
-class Artist < ActiveRecord::Base
-  has_many :songs
-
-end
-```
-
-And that's it! Now, because our songs table has an `artist_id` column and because our `Artist` class uses the `has_many` macro, an artist has many songs!
-
-It is also true that an artist has many genres through songs. We will use the `has_many through` macro to implement this:
-
 ```ruby
 class Artist < ActiveRecord::Base
   has_many :songs
   has_many :genres, through: :songs
 end
 ```
-
-### Genres Have Many Songs and Have Many Artists
-
-Create a file `app/models/genre.rb`. In it, define a class, `Genre`, to inherit from `ActiveRecord::Base`. 
-
-```ruby
-class Genre < ActiveRecord::Base
-
-end
-```
-
-A genre can have many songs. Let's implement that with the `has_many` macro:
-
-```ruby
-class Genre < ActiveRecord::Base
-  has_many :songs
-end
-```
-
-A genre also has many artists through its songs. Let's implement this relationship with the `has_many through` macro:
 
 ```ruby
 class Genre < ActiveRecord::Base
@@ -198,11 +52,11 @@ class Genre < ActiveRecord::Base
 end
 ```
 
-And that's it!
+And that's it! With this relatively small amount of code, we now have access to a whole host of methods provided by Active Record.
 
-## Our Code in Action: Working with Associations
+## Association Methods
 
-Go ahead and run the test suite and you'll see that we are passing all of our tests! Amazing! Our associations are all working, just because of our migrations and use of macros. 
+Go ahead and run the test suite and you'll see that we are passing the first 14 tests! Amazing! Our associations are all working, just because of our migrations and use of macros. 
 
 Let's play around with our code. 
 
