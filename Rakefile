@@ -13,6 +13,10 @@ namespace :db do
   task :drop => :environment do 
     drop_db
   end
+
+  task :seed => :environment do
+    Rake::Task["db:seed"].invoke
+  end
 end
 
 task :console => :environment do
