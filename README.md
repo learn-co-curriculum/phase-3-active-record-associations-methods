@@ -140,4 +140,3 @@ end
 ```
 
 We'll do a handful of methods like this one for the `Song`, `Artist`, and `Genre` classes. This lab is test driven, so you can follow the specs.
->>>>>>> wip-solution
