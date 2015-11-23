@@ -20,7 +20,7 @@ describe 'Genre Associations' do
     song = Song.create(name: "Sweet Tunez", genre: @genre)
     artist.songs << song
     artist.save
-
+    @genre.artist_count
     expect(@genre.artists).to include(artist)
   end
   
