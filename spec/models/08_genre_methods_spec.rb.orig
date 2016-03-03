@@ -7,6 +7,10 @@ describe 'Genre Methods' do
     @genre.save
   end
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> issue #4
   it '#song_count' do
     @genre.songs << Song.create(name: "Something By That Person Who Sings Stuff")
     @genre.save
