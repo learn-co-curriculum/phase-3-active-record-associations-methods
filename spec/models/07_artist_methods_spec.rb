@@ -8,9 +8,6 @@ describe 'Artist Methods' do
     @prince.songs << song
   end
 
-  after do 
-    clean_database
-  end
 
   describe '#get_genre_of_first_song' do
     it 'returns the genre of the artists first saved song' do

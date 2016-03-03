@@ -3,10 +3,6 @@ describe 'Genre Associations' do
     @genre = Genre.create(name: "Hip Hop")
   end
 
-  after do 
-    clean_database
-  end
-
   it 'has many songs' do
     @genre.songs << Song.create(name: "Something By That Person Who Sings Stuff")
     @genre.save
