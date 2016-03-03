@@ -7,11 +7,7 @@ describe 'Artist Methods' do
     song.save
     @prince.songs << song
   end
-
-  after do 
-    clean_database
-  end
-
+  
   describe '#get_genre_of_first_song' do
     it 'returns the genre of the artists first saved song' do
       expect(@prince.get_genre_of_first_song).to be_a(Genre)

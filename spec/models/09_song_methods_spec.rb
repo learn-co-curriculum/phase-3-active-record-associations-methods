@@ -2,11 +2,7 @@ describe 'Song Methods' do
   before do
     @song = Song.create(name: "Forever")
   end
-
-  after do 
-    clean_database
-  end
-
+  
   it '#get_genre_name' do
     genre = Genre.create(name: "Rock")
     @song.genre = genre
