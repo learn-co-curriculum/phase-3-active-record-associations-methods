@@ -3,10 +3,6 @@ describe 'Song Associations' do
     @song = Song.create(name: "Forever")
   end
 
-  after do 
-    clean_database
-  end
-
   it 'has a genre' do
     genre = Genre.create(name: "Rock")
     @song.genre = genre

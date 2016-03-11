@@ -3,10 +3,6 @@ describe 'Artist Associations' do
     @prince = Artist.create(name: "Prince")
   end
 
-  after do 
-    clean_database
-  end
-
   it 'can build a song' do
     song = @prince.songs.build(name: "A Song By Prince")
     song.save
