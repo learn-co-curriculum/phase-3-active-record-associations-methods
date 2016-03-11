@@ -2,16 +2,16 @@
 
 ## Objectives
 
-1. Understand the common methods we have access to from our ActiveRecord associations 
+1. Understand the common methods we have access to from our ActiveRecord associations
 2. Use the methods that ActiveRecord gives you based on your associations
 
 Previously, we learned what Active Record associations are and how to use them. In this lab, we are going to start with the association relationships already coded for `Songs`, `Genres`, and `Artists`. These associations look like this:
 
-* Artists have many songs and a song belongs to an artist. 
-* Artists have many genres through songs. 
-* Songs belong to a genre. 
-* A genre has many songs. 
-* A genre has many artists through songs. 
+* Artists have many songs and a song belongs to an artist.
+* Artists have many genres through songs.
+* Songs belong to a genre.
+* A genre has many songs.
+* A genre has many artists through songs.
 
 You may recall that by writing a few migrations and making use of the appropriate ActiveRecord macros, we will be able to:
 
@@ -21,11 +21,11 @@ You may recall that by writing a few migrations and making use of the appropriat
 
 
 
-We will build these associations through the use of Active Record migrations and macros. 
+We will build these associations through the use of Active Record migrations and macros.
 
 ### Building our Migrations
 
-You can take a look at the migration, if you need a reminder of the tables' structures. Run `rake db:migrate` in your terminal to execute our table creations. 
+You can take a look at the migration, if you need a reminder of the tables' structures. Run `rake db:migrate` in your terminal to execute our table creations.
 
 ### Building our Associations using AR Macros
 
@@ -58,7 +58,7 @@ And that's it! With this relatively small amount of code, we now have access to 
 
 Go ahead and run the test suite and you'll see that we are passing the first 14 tests. Our associations are all working, just because of our migrations and use of macros.
 
-We can now call methods on the objects we associated with one another. Let's play around with our code. 
+We can now call methods on the objects we associated with one another. Let's play around with our code.
 
 ```ruby
 hello = Song.create(name: "Hello")
@@ -114,7 +114,7 @@ We are going to write some methods of our own. We want to take advantage of our 
 ```ruby
 class Artist
   def get_first_song
-    
+
   end
 end
 ```
@@ -140,4 +140,3 @@ end
 ```
 
 We'll do a handful of methods like this one for the `Song`, `Artist`, and `Genre` classes. This lab is test driven, so you can follow the specs.
->>>>>>> wip-solution
