@@ -1,24 +1,10 @@
-task :environment do
-  ENV["PLAYLISTER_ENV"] ||= "development"
-  require_relative 'config/environment'
-  # require 'logger'
-  # ActiveRecord::Base.logger = Logger.new(STDOUT)
-end
+ENV["PLAYLISTER_ENV"] ||= "development"
 
-namespace :db do
-  task :migrate => :environment do
-    migrate_db
-  end
+require_relative './config/environment'
+require 'sinatra/activerecord/rake'
 
-  task :drop => :environment do 
-    drop_db
-  end
+# Type `rake -T` on your command line to see the available rake tasks.
 
-  task :seed => :environment do
-    Rake::Task["db:seed"].invoke
-  end
-end
-
-task :console => :environment do
+task :console do
   Pry.start
 end
