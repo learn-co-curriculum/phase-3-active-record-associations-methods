@@ -5,36 +5,25 @@ require_relative '../config/environment'
 RSpec.configure do |config|
   config.order = 'default'
 
-<<<<<<< HEAD
   `rake db:migrate`
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
-=======
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
->>>>>>> issue #4
-  end
-
-<<<<<<< HEAD
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start
   end
-=======
-def reset_database
-  `rake db:migrate`
-end
->>>>>>> issue #4
 
   config.after(:each) do
     DatabaseCleaner.clean
   end
 end
+<<<<<<< HEAD
+=======
+
+# def reset_database
+#   `rake db:migrate`
+# end
+>>>>>>> Fix test database generation so that tests run correctly
