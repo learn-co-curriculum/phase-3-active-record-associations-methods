@@ -17,5 +17,5 @@ thriller.artist = mj
 drake.songs << hotline_bling
 mj.songs << thriller
 
-pop.songs << mj
-rap.songs << drake
+pop.songs << thriller
+rap.songs << hotline_bling
