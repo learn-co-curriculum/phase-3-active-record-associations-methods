@@ -174,4 +174,55 @@ We'll do a handful of methods like this one for the `Song`, `Artist`, and
 `Genre` classes. This lab is test-driven, so follow the specs and read the test
 error messages for additional information.
 
+The below methods are defined in the `artist.rb`, `genre.rb` and `song.rb`
+within `app/models`, but are all currently empty. Write implementations for each
+using ActiveRecord methods.
+
+### Artist Methods
+
+#### `#get_genre_of_first_song`
+
+Returns the genre of the artist's first saved song (maybe the `#get_first_song` method can be used here?)
+
+#### `#song_count`
+
+Return the total number of songs associated with the artist
+
+#### `#genre_count`
+
+Return the total number of genres associated with the artist
+
+### Genre Methods
+
+#### `#song_count`
+
+Return the total number of songs associated with the genre
+
+#### `#artist_count`
+
+Return the number of artists associated with the genre
+
+#### `#all_artist_names`
+
+Return an array of strings containing every musician's name
+
+### Song Methods
+
+#### `#get_genre_name`
+
+Return the name of the genre this song belongs to
+
+#### `#drake_made_this`
+
+For the final method in this lab, rather than return a specific value or set of
+values like the previous labs, your task is to create an association between
+a song and an artist. In this case, we'll use one artist for simplicity - Drake.
+
+When this method is called, it should assign the song's artist to Drake.
+Drake doesn't exist in the database as an artist yet, so you'll have to
+create a record. However, if this method is run multiple times, you won't want
+to create a new record _each time_. Rather, you only want to create a record
+if Drake is not found in the database already. Once found or created, assign
+this song to the drake Artist instance.
+
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/Active-Record-Association-Methods' title='Active Record Association Methods'>Active Record Association Methods</a> on Learn.co and start learning to code for free.</p>
