@@ -20,3 +20,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+# def reset_database
+#   `rake db:migrate`
+# end
