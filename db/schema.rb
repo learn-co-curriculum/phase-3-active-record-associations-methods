@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 5) do
   end
 
   create_table "songs", force: :cascade do |t|
-    t.string  "name"
+    t.string "name"
     t.integer "artist_id"
     t.integer "genre_id"
   end
