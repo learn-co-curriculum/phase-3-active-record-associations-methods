@@ -3,12 +3,13 @@ Bundler.require
 
 require 'active_record'
 require 'rake'
+require_all 'app/models'
 
-Dir[File.join(File.dirname(__FILE__), "../app/models", "*.rb")].each {|f| require f}
-Dir[File.join(File.dirname(__FILE__), "../lib/support", "*.rb")].each {|f| require f}
+ENV["PLAYLISTER_ENV"] ||= "development"
 
-DBRegistry[ENV["PLAYLISTER_ENV"]].connect!
-DB = ActiveRecord::Base.connection
+ActiveRecord::Base.establish_connection(ENV["PLAYLISTER_ENV"].to_sym)
+
+ActiveRecord::Base.logger = nil
 
 if ENV["PLAYLISTER_ENV"] == "test"
   ActiveRecord::Migration.verbose = false
