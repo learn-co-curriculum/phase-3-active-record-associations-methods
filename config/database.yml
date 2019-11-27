@@ -4,4 +4,4 @@ development:
 
 test:
   adapter: 'sqlite3'
-  database: 'test.db'
+  database: 'db/test.db'
