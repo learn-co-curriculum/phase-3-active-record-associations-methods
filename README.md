@@ -225,4 +225,4 @@ to create a new record _each time_. Rather, you only want to create a record
 if Drake is not found in the database already. Once found or created, assign
 this song to the drake Artist instance.
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/Active-Record-Association-Methods' title='Active Record Association Methods'>Active Record Association Methods</a> on Learn.co and start learning to code for free.</p>
+
