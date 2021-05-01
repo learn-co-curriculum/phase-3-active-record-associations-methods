@@ -1,10 +1,11 @@
 # Active Record Association Methods
 
-## Objectives
+## Learning Goals
 
-- Understand the common methods we have access to from our Active Record
-   associations
+- Understand the common methods we have access to from our Active Record associations
 - Use the methods that Active Record gives you based on your associations
+
+## Introduction
 
 Previously, we learned what Active Record associations are and how to use them.
 In this lab, we are going to start with the association relationships already
