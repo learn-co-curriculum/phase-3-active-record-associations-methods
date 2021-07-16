@@ -243,3 +243,5 @@ record for him. However, if this method is run multiple times, you won't want to
 create a new record _each time_. Rather, you only want to create a record if
 Drake is not found in the database already. Once found or created, assign this
 song to the drake Artist instance.
+
+**Hint**: Look into the `.find_or_create_by` Active Record method!
