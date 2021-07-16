@@ -2,7 +2,8 @@
 
 ## Learning Goals
 
-- Understand the common methods we have access to from our Active Record associations
+- Understand the common methods we have access to from our Active Record
+  associations
 - Use the methods that Active Record gives you based on your associations
 
 ## Introduction
@@ -17,6 +18,10 @@ coded for `Songs`, `Genres`, and `Artists`. These associations look like this:
 - A genre has many songs.
 - A genre has many artists through songs.
 
+Here's what our Entity Relationship Diagram looks like:
+
+![Playlister ERD](https://curriculum-content.s3.amazonaws.com/phase-3/active-record-associations-and-migrations/artists-songs-genres.png)
+
 You may recall that by writing a few migrations and making use of the
 appropriate Active Record macros, we will be able to:
 
@@ -29,36 +34,37 @@ macros.
 
 ### Building our Migrations
 
-You can take a look at the migration, if you need a reminder of the tables'
-structures. Run `rake db:migrate` in your terminal to execute our table
-creations.
+You can take a look at the migrations if you need a reminder of the tables'
+structures. Run `rake db:migrate` in your terminal to run the migrations.
 
 ### Building our Associations using AR Macros
 
-We used the following AR macros (or methods): [`has_many`][], [`has_many
-through`][], [`belongs_to`][]. They helped us associate `songs`, `genres`, and
-`artists`.
+In the previous lesson, we used the following AR macros (or methods):
+[has_many][], [has_many through][], [belongs_to][]. They helped us associate
+`songs`, `genres`, and `artists`.
 
-[`has_many`]: http://guides.rubyonrails.org/association_basics.html#the-has-many-association
-[`has_many through`]: http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association
-[`belongs_to`]: http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association
+[has_many]: http://guides.rubyonrails.org/association_basics.html#the-has-many-association
+[has_many through]: http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association
+[belongs_to]: http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association
 
-```ruby
-class Song < Active Record::Base
+Here's how they look:
+
+```rb
+class Song < ActiveRecord::Base
   belongs_to :artist
   belongs_to :genre
 end
 ```
 
-```ruby
-class Artist < Active Record::Base
+```rb
+class Artist < ActiveRecord::Base
   has_many :songs
   has_many :genres, through: :songs
 end
 ```
 
-```ruby
-class Genre < Active Record::Base
+```rb
+class Genre < ActiveRecord::Base
   has_many :songs
   has_many :artists, through: :songs
 end
@@ -75,72 +81,73 @@ of macros.
 
 We can now call methods on the objects we associated with one another. Let's
 play around with our code using the console task we wrote for you in the
-Rakefile.
+`Rakefile`. Run the migrations, and open the console:
 
-```bash
-rake console
+```sh
+bundle exec rake db:migrate
+bundle exec rake console
 ```
 
-```ruby
+Then try out some methods:
+
+```rb
 hello = Song.create(name: "Hello")
-=> #<Song:0x007fc75a8de3d8 id: 1, name: "Hello", artist_id: nil, genre_id: nil>
-```
-
-```ruby
+# => #<Song:0x007fc75a8de3d8 id: 1, name: "Hello", artist_id: nil, genre_id: nil>
 adele = Artist.create(name: "Adele")
-=> #<Artist:0x007fc75b8d9490 id: 1, name: "Adele">
+# => #<Artist:0x007fc75b8d9490 id: 1, name: "Adele">
 ```
 
-So, we know that an individual song has an `artist_id` attribute. We *could*
+So, we know that an individual song has an `artist_id` attribute. We _could_
 associate `hello` to `adele` by setting `hello.artist_id=` equal to the `id` of
 the `adele` object. BUT! Active Record makes it so easy for us. The macros we
 implemented in our classes allow us to associate a song object directly to an
 artist object:
 
-```ruby
+```rb
 hello.artist = adele
-=> #<Artist:0x007fc75b8d9490 id: 1, name: "Adele">
+# => #<Artist:0x007fc75b8d9490 id: 1, name: "Adele">
 ```
 
 Now, we can ask `hello` who its artist is:
 
-```ruby
+```rb
 hello.artist
-=> #<Artist:0x007fc75b8d9490 id: 1, name: "Adele">
+# => #<Artist:0x007fc75b8d9490 id: 1, name: "Adele">
 ```
 
-We can even chain methods to ask `hello` for the *name* of its artist:
+We can even chain methods to ask `hello` for the _name_ of its artist:
 
-```ruby
+```rb
 hello.artist.name
-=> "Adele"
+# => "Adele"
 ```
 
 We can tell the artist about their song:
 
-```ruby
+```rb
 rolling_in_the_deep = Song.create(name: "Rolling in the Deep")
-=> #<Song:0x007fc75bb4d1e0 id: 2, name: "Rolling in the Deep", artist_id: nil, genre_id: nil>
+# => #<Song:0x007fc75bb4d1e0 id: 2, name: "Rolling in the Deep", artist_id: nil, genre_id: nil>
 ```
 
-```ruby
+```rb
 adele.songs << rolling_in_the_deep
-=> #[ <Song:0x007fc75bb4d1e0 id: 2, name: "Rolling in the Deep", artist_id: 1, genre_id: nil> ]
+# => #[ <Song:0x007fc75bb4d1e0 id: 2, name: "Rolling in the Deep", artist_id: 1, genre_id: nil> ]
 
 rolling_in_the_deep.artist
-=> #<Artist:0x007fc75b8d9490 id: 1, name: "Adele">
+# => #<Artist:0x007fc75b8d9490 id: 1, name: "Adele">
 ```
 
 ## Starting the Lab
-
-Be sure to run `rake db:migrate`
 
 We are going to write some methods of our own. We want to take advantage of our
 new methods, thanks to the Active Record macros. Therefore, every method we write
 will use some code that was generated by a macro. For example:
 
-```ruby
+```rb
 class Artist
+  has_many :songs
+  has_many :genres, through: :songs
+
   def get_first_song
 
   end
@@ -148,23 +155,33 @@ end
 ```
 
 How would you write the `#get_first_song` method so that it returns the first
-`song` object saved to the artist it's called on? By using the macros! Just like
-above when we called `adele.songs`, we now want to call `songs` on the instance
+song saved to the artist it's called on? By using the macros! Just like
+above when we called `adele.songs`, we now want to call `#songs` on the instance
 that the method will be called on in the future. How do we do that? Yes, `self`!
 
-```ruby
+```rb
 class Artist
+  has_many :songs
+  has_many :genres, through: :songs
+
   def get_first_song
     self.songs
   end
 end
 ```
 
-This will return an array of the artist's songs. Since our method is
-specifically looking for the first song, we just have to chain on a `first`.
+Recall that using `has_many :songs` creates an instance method `#songs` that we
+can call on any instance of an artist.
 
-```ruby
+Calling this method now will return an array of the artist's songs. Since our
+method is specifically looking for the first song, we just have to chain on a
+`#first`.
+
+```rb
 class Artist
+  has_many :songs
+  has_many :genres, through: :songs
+
   def get_first_song
     self.songs.first
   end
@@ -183,47 +200,46 @@ using ActiveRecord methods.
 
 #### `#get_genre_of_first_song`
 
-Returns the genre of the artist's first saved song (maybe the `#get_first_song` method can be used here?)
+Returns the genre of the artist's first saved song (maybe the `#get_first_song`
+method can be used here?).
 
 #### `#song_count`
 
-Return the total number of songs associated with the artist
+Return the total number of songs associated with the artist.
 
 #### `#genre_count`
 
-Return the total number of genres associated with the artist
+Return the total number of genres associated with the artist.
 
 ### Genre Methods
 
 #### `#song_count`
 
-Return the total number of songs associated with the genre
+Return the total number of songs associated with the genre.
 
 #### `#artist_count`
 
-Return the number of artists associated with the genre
+Return the number of artists associated with the genre.
 
 #### `#all_artist_names`
 
-Return an array of strings containing every musician's name
+Return an array of strings containing every artist's name.
 
 ### Song Methods
 
 #### `#get_genre_name`
 
-Return the name of the genre this song belongs to
+Return the name of the genre this song belongs to.
 
 #### `#drake_made_this`
 
 For the final method in this lab, rather than return a specific value or set of
-values like the previous labs, your task is to create an association between
-a song and an artist. In this case, we'll use one artist for simplicity - Drake.
+values like the previous labs, your task is to create an association between a
+song and an artist. In this case, we'll use one artist for simplicity — Drake.
 
-When this method is called, it should assign the song's artist to Drake.
-Drake doesn't exist in the database as an artist yet, so you'll have to
-create a record. However, if this method is run multiple times, you won't want
-to create a new record _each time_. Rather, you only want to create a record
-if Drake is not found in the database already. Once found or created, assign
-this song to the drake Artist instance.
-
-
+When this method is called, it should assign the song's artist to Drake. Drake
+doesn't exist in the database as an artist yet, so you'll have to create a
+record for him. However, if this method is run multiple times, you won't want to
+create a new record _each time_. Rather, you only want to create a record if
+Drake is not found in the database already. Once found or created, assign this
+song to the drake Artist instance.
