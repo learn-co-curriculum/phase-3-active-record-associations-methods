@@ -1,16 +1,6 @@
+ENV["RACK_ENV"] ||= "development"
+
 require 'bundler/setup'
-Bundler.require
+Bundler.require(:default, ENV["RACK_ENV"])
 
-require 'active_record'
-require 'rake'
 require_all 'app/models'
-
-ENV["PLAYLISTER_ENV"] ||= "development"
-
-ActiveRecord::Base.establish_connection(ENV["PLAYLISTER_ENV"].to_sym)
-
-ActiveRecord::Base.logger = nil
-
-if ENV["PLAYLISTER_ENV"] == "test"
-  ActiveRecord::Migration.verbose = false
-end

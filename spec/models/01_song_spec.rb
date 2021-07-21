@@ -1,10 +1,8 @@
-describe 'Song' do
-  before do
-    @song = Song.create(name: "Forever")
-  end
-
+describe Song do
+  
   it 'has a name' do
-    expect(Song.where(name: "Forever").first).to eq(@song)
+    song = Song.create(name: "Forever")
+    expect(Song.find_by(name: "Forever")).to eq(song)
   end
 
 end

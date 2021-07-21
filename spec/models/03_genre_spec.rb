@@ -1,10 +1,8 @@
-describe 'Genre' do
-  before do
-    @genre = Genre.create(name: "Hip Hop")
-  end
+describe Genre do
 
   it 'has a name' do
-    expect(Genre.where(name: "Hip Hop").first).to eq(@genre)
+    genre = Genre.create(name: "Hip Hop")
+    expect(Genre.find_by(name: "Hip Hop")).to eq(genre)
   end
-  
+
 end
