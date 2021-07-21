@@ -1,35 +1,36 @@
 describe 'Song Methods' do
   before do
-    @song = Song.create(name: "Forever")
+    Song.create(name: "Forever")
   end
 
-
-  it '#get_genre_name' do
-    genre = Genre.create(name: "Rock")
-    @song.genre = genre
-    @song.save
-
-    expect(@song.get_genre_name).to eq("Rock")
+  describe '#get_genre_name' do
+    it "returns a string for the name of the song's genre" do
+      song = Song.find_by(name: "Forever")
+      genre = Genre.create(name: "Rock")
+      song.genre = genre
+      song.save
+  
+      expect(song.get_genre_name).to eq("Rock")
+    end
   end
 
-  it '#drake_made_this' do
-    expect(@song.artist).to eq(nil)
+  describe '#drake_made_this' do
+    it "changes the artist who made the song to Drake" do
+      song = Song.find_by(name: "Forever")
+      song.drake_made_this
+      
+      expect(song.artist).to have_attributes(class: Artist, name: "Drake")
+    end
 
-    @song.drake_made_this
+    it "creates only one Drake artist in the database, even if run multiple times" do
+      song = Song.find_by(name: "Forever")
+      song2 = Song.create(name: "Forever 2")
 
-    expect(@song.artist).to be_a(Artist)
-    expect(@song.artist.name).to eq("Drake")
+      song.drake_made_this
+      song2.drake_made_this
 
-    expect(Artist.all.length).to eq(1)
-
-    kiki = Song.create(name: 'In My Feelings')
-
-    kiki.drake_made_this
-    
-    expect(kiki.artist).to be_a(Artist)
-    expect(kiki.artist.name).to eq("Drake")
-
-    expect(Artist.all.length).to eq(1), 'Create only one Drake artist record in the database, even if method is run multiple times'
+      expect(Artist.all.length).to eq(1)
+    end
     
   end
 end
