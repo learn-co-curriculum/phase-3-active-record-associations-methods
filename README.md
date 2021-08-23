@@ -45,8 +45,8 @@ that joins between our `artists` and `genres` tables.
 
 To run the migrations, run:
 
-```sh
-bundle exec rake db:migrate
+```console
+$ bundle exec rake db:migrate
 ```
 
 ### Building our Associations using Active Record Macros
@@ -95,20 +95,20 @@ We can now call methods on the objects we associated with one another. Let's
 play around with our code using the console task we wrote for you in the
 `Rakefile`. Run the migrations (if you haven't already):
 
-```sh
-bundle exec rake db:migrate
+```console
+$ bundle exec rake db:migrate
 ```
 
 Then seed the database:
 
-```sh
-bundle exec rake db:seed
+```console
+$ bundle exec rake db:seed
 ```
 
 Then open the console:
 
-```sh
-bundle exec rake console
+```console
+$ bundle exec rake console
 ```
 
 Then try out some methods:
