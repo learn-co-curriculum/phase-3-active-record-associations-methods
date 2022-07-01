@@ -27,7 +27,7 @@ In the previous lessons, we had a similar set of associations between games,
 reviews and users, where the reviews table joined between our users and games.
 
 While the models are different for this lab, our approach will be the same. By
-writing few migrations and making use of the appropriate Active Record macros,
+writing a few migrations and making use of the appropriate Active Record macros,
 we will be able to:
 
 - ask an Artist about its songs and genres
@@ -215,7 +215,7 @@ We'll do a handful of methods like this one for the `Song`, `Artist`, and
 `Genre` classes. This lab is test-driven, so follow the specs and read the test
 error messages for additional information.
 
-The below methods are defined in the `artist.rb`, `genre.rb` and `song.rb`
+The below methods are defined in the `artist.rb`, `genre.rb` and `song.rb` files
 within `app/models`, but are all currently empty. Write implementations for each
 using ActiveRecord methods.
 
